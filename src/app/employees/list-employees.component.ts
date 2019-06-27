@@ -1,50 +1,45 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
+// tslint:disable: variable-name
 
 @Component({
-  selector: 'app-list-employees',
   templateUrl: './list-employees.component.html',
   styleUrls: ['./list-employees.component.css']
 })
 export class ListEmployeesComponent implements OnInit {
-  employees: Employee[] = [
-    {
-      id: 1,
-      name: 'Mark',
-      gender: 'Male',
-      contactPreference: 'Email',
-      email: 'mark@pragimtech.com',
-      dateOfBirth: new Date('10/25/1988'),
-      department: 'IT',
-      isActive: true,
-      photoPath: 'assets/images/Mark.PNG'
-    },
-    {
-      id: 2,
-      name: 'Mary',
-      gender: 'Female',
-      contactPreference: 'Phone',
-      phoneNumber: 2345978640,
-      dateOfBirth: new Date('11/20/1979'),
-      department: 'HR',
-      isActive: true,
-      photoPath: 'assets/images/Mary.PNG'
-    },
-    {
-      id: 3,
-      name: 'John',
-      gender: 'Male',
-      contactPreference: 'Phone',
-      phoneNumber: 5432978640,
-      dateOfBirth: new Date('3/25/1976'),
-      department: 'IT',
-      isActive: false,
-      photoPath: 'assets/images/John.PNG'
-    },
-  ];
-  constructor() { }
+  employees: Employee[];
+  filteredEmployees: Employee[];
+
+  private _searchTerm: string;
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.filteredEmployees = this.filterEmployees(value);
+  }
+
+  filterEmployees(searchString: string) {
+    return this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
+  }
+
+  constructor(private _router: Router, private _route: ActivatedRoute) {
+    this.employees = this._route.snapshot.data.employeeList;
+    if (this._route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
+    } else {
+      this.filteredEmployees = this.employees;
+    }
+  }
+
+  onDeleteNotification(id: number) {
+    const i = this.filteredEmployees.findIndex(e => e.id === id);
+    if (i !== -1) {
+        this.filteredEmployees.splice(i, 1);
+        }
+  }
 
   ngOnInit() {
   }
-
 }
