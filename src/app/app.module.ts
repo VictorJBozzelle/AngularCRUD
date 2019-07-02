@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { SelectRequiredValidatorDirective } from './shared/select-required-validator.directive';
 
@@ -19,6 +20,7 @@ import { EmployeeListResolverService } from './employees/employee-list-resolver.
 import { PageNotFoundComponent } from './page-not-found.component';
 import { EmployeeDetailsGuardService } from './employees/employee-details-guard.service';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { AccordionComponent } from './shared/accordion.component';
 
 
 const appRoutes: Routes = [
@@ -54,10 +56,12 @@ const appRoutes: Routes = [
     EmployeeDetailsComponent,
     EmployeeFilterPipe,
     PageNotFoundComponent,
+    AccordionComponent,
   ],
   imports: [
     FormsModule,
     BrowserModule,
+    AngularFontAwesomeModule,
     BsDatepickerModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
