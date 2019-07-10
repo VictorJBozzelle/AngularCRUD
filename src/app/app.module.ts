@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
@@ -9,18 +9,19 @@ import { SelectRequiredValidatorDirective } from './shared/select-required-valid
 
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { EmployeeService } from './employees/employee.service';
+import { AccordionComponent } from './shared/accordion.component';
+import { PageNotFoundComponent } from './page-not-found.component';
+import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
+import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { ListEmployeesComponent } from './employees/list-employees.component';
 import { CreateEmployeeComponent } from './employees/create-employee.component';
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
-import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
 import { EmployeeDetailsComponent } from './employees/employee-details.component';
-import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
 import { EmployeeListResolverService } from './employees/employee-list-resolver.service';
-import { PageNotFoundComponent } from './page-not-found.component';
 import { EmployeeDetailsGuardService } from './employees/employee-details-guard.service';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
-import { AccordionComponent } from './shared/accordion.component';
+import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
 
 
 const appRoutes: Routes = [
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
   imports: [
     FormsModule,
     BrowserModule,
+    HttpClientModule,
     AngularFontAwesomeModule,
     BsDatepickerModule.forRoot(),
     RouterModule.forRoot(appRoutes)

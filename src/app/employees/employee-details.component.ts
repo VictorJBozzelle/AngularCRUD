@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from './employee.service';
+import { max } from 'rxjs/operators';
 // tslint:disable: variable-name
 
 @Component({
@@ -19,12 +20,15 @@ export class EmployeeDetailsComponent implements OnInit {
   ngOnInit() {
     this._route.paramMap.subscribe(params => {
     this._id = +params.get('id');
-    this.employee = this._employeeService.getEmployee(this._id);
+    this._employeeService.getEmployee(this._id).subscribe(
+      (employee) => this.employee = employee,
+      (err: any) => console.log(err)
+    );
     });
   }
 
   viewNextEmployee() {
-    if (this._id < 3) {
+    if (this._id < 4) {
       this._id += 1;
     } else {
       this._id = 1;
