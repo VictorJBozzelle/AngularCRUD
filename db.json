@@ -1,18 +1,6 @@
 {
   "employees": [
     {
-      "id": 1,
-      "name": "Sara",
-      "gender": "Female",
-      "contactPreference": "Phone",
-      "email": "sara@pragimtech.com",
-      "dateOfBirth": "1980-08-08T05:00:00.000Z",
-      "department": "4",
-      "isActive": true,
-      "photoPath": "assets/images/mary.png",
-      "phoneNumber": "1234567"
-    },
-    {
       "id": 2,
       "name": "Mary",
       "gender": "Female",

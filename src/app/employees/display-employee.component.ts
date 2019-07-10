@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from './employee.service';
+import { CodegenComponentFactoryResolver } from '@angular/core/src/linker/component_factory_resolver';
 
 // tslint:disable: variable-name
 @Component({
@@ -35,7 +36,9 @@ export class DisplayEmployeeComponent implements OnInit {
   }
 
   deleteEmployee() {
-    this._employeeService.deleteEmployee(this.employee.id);
+    this._employeeService.deleteEmployee(this.employee.id).subscribe(
+      () => console.log('Employee with Id = ${this.employee.id} has been deleted'),
+      (err) => console.log(err));
     this.notifyDelete.emit(this.employee.id);
   }
 }
